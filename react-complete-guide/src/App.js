@@ -30,10 +30,13 @@ function App() {
 		},
 	];
 
+	function addExpenseHandler(newExpense) {
+		console.log('Add.js is called.');
+	};
 
 	return (
 		<div>
-			<NewExpense />
+			<NewExpense addExpense={addExpenseHandler}/>
 			<Expenses items={expenses}/>
 		</div>
 	);
