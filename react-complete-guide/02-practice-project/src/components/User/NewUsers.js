@@ -1,7 +1,7 @@
 import React from "react";
 
 import Card from "../Card/Card";
-import styles from './NewUsers.module.css';
+import User from "./User";
 
 const NewUsers = (props) => {
 	if (props.users.length === 0) {
@@ -13,9 +13,7 @@ const NewUsers = (props) => {
 			{
 				props.users.map((user) => {
 					return (
-						<div className={styles.newUsers}>
-							{user.username} ({user.age} years old)
-						</div>
+						<User user={user} deleteUser={props.deleteUser}/>
 					);
 				})
 			}

@@ -10,7 +10,7 @@ const AddUser = (props) => {
 	const [age, setAge] = useState('');
 
 	const onTapButton = () => {
-		const newUser = {id: Math.random().toString(), username: userName, age: age};
+		const newUser = {key: Math.random().toString(), name: userName, age: age};
 		props.addNewUser(newUser);
 		resetFormInput();
 	}
