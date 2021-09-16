@@ -11,7 +11,7 @@ const NewUsers = (props) => {
 	return (
 		<Card>
 			{
-				props.NewUsers.map((user) => {
+				props.users.map((user) => {
 					return (
 						<div className={styles.newUsers}>
 							{user.username} ({user.age} years old)

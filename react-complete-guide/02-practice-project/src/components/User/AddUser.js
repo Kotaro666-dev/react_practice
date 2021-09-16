@@ -4,15 +4,20 @@ import styles from './AddUser.module.css';
 import Button from '../Button/Button.js'
 import Card from "../Card/Card";
 
-const AddUser = () => {
+const AddUser = (props) => {
 
 	const [userName, setUserName] = useState('');
 	const [age, setAge] = useState('');
 
 	const onTapButton = () => {
-		console.log(userName);
-		console.log(age);
-		console.log('Tapped Button');
+		const newUser = {id: Math.random().toString(), username: userName, age: age};
+		props.addNewUser(newUser);
+		resetFormInput();
+	}
+
+	const resetFormInput = () => {
+		setUserName('');
+		setAge('');
 	}
 
 	const getUserName = (event) => {

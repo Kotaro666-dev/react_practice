@@ -4,20 +4,23 @@ import AddUser from './components/User/AddUser';
 import NewUsers from './components/User/NewUsers';
 
 const INITIALDATA = [
-	{username: 'Kotaro', age: '31'},
-	{username: 'Nut', age: '20'},
+	{id: '1', username: 'Kotaro', age: '31'},
+	{id: '2', username: 'Nut', age: '20'},
 ];
 
 function App() {
 	const [users, setUsers] = useState(INITIALDATA);
 
-	const update = () => {
-		setUsers('');
+
+	const addNewUser = (newUser) => {
+		setUsers((prevState) => {
+			return [...prevState, newUser];
+		});
 	}
 
 	return (
 		<div>
-			<AddUser />
+			<AddUser addNewUser={addNewUser} />
 			<NewUsers users={users}/>
 		</div>
 	);
