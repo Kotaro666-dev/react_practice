@@ -1,0 +1,7 @@
+.newUsers {
+	font: inherit;
+	display: block;
+	width: 100%;
+	border: 1px solid #ccc;
+	padding: 0.5rem;
+}

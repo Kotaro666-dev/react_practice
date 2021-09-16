@@ -1,13 +1,10 @@
 import React from "react";
 
-import AddUser from "../User/AddUser";
 import styles from './Card.module.css';
 
-const Card = () => {
+const Card = (props) => {
 	return (
-		<div className={styles.card}>
-			<AddUser />
-		</div>
+		<div className={styles.card}>{props.children}</div>
 	);
 }
 
