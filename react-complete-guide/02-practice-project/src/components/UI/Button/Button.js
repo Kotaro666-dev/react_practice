@@ -4,7 +4,7 @@ import styles from './Button.module.css'
 
 const Button = (props) => {
 	return (
-		<button type="submit" className={styles.button} onClick={props.onTapButton}>Add User</button>
+		<button type={props.type || 'button'} className={styles.button} onClick={props.onClick}>{props.children}</button>
 	);
 }
 
