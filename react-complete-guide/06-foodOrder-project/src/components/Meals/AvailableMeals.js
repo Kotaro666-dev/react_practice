@@ -7,7 +7,7 @@ import Card from "../UI/Card"
 
 const AvailableMeals = () => {
 	const mealsList = dummy_meals.map((meal) => {
-		return <MealItem key={meal.id} name={meal.name} description={meal.description} price={meal.price}/>
+		return <MealItem key={meal.id} id={meal.id} name={meal.name} description={meal.description} price={meal.price}/>
 	});
 
 
