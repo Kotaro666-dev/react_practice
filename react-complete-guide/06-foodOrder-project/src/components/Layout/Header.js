@@ -3,6 +3,7 @@ import React from "react";
 import classes from './Header.module.css';
 import mealImage from '../../assets/images/meals.jpg';
 import HeaderCartButton from "./HeaderCartButton";
+import MealsSummary from "../Meals/MealsSummary";
 
 const Header = () => {
 	return (
