@@ -4,6 +4,7 @@ import MoviesList from './components/MoviesList';
 import './App.css';
 import AddMovie from './components/AddMovie';
 
+/// TODO: Change base url
 const url = 'firebase_url/movies.json';
 
 function App() {
