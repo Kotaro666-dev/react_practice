@@ -8,7 +8,7 @@ const SimpleInput = (props) => {
 			isValueValid: isNameValid,
 			hasError: nameInputHasError,
 			valueChangeHandler: nameChangeHandler,
-			InputBlurHandler: nameBlurHandler,
+			inputBlurHandler: nameBlurHandler,
 			reset: resetNameInput,
 	} = useInput(validateName);
 
@@ -16,7 +16,7 @@ const SimpleInput = (props) => {
 		isValueValid: isEmailValid,
 		hasError: emailInputHasError,
 		valueChangeHandler: emailChangeHandler,
-		InputBlurHandler: emailBlurHandler,
+		inputBlurHandler: emailBlurHandler,
 		reset: resetEmailInput,} = useInput(validateEmail);
 
 	let formIsValid = false;
