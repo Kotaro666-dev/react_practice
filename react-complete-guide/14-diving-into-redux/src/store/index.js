@@ -7,12 +7,12 @@ const initialState = {
 const counterReducer = (prevState, action) => {
 	if (action.type === 'INCREMENT') {
 		return {
-			counter: prevState.counter + 1,
+			counter: prevState.counter + (action.value || 1),
 		};
 	}
 	if (action.type === 'DECREMENT') {
 		return {
-			counter: prevState.counter - 1,
+			counter: prevState.counter - (action.value || 1),
 		};
 	}
 	return prevState;
