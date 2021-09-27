@@ -1,9 +1,9 @@
 import { configureStore, createSlice } from '@reduxjs/toolkit';
 
 class Item {
-	constructor(id, name, price, nums) {
+	constructor(id, title, price, nums) {
 		this.id = id;
-		this.name = name;
+		this.title = title;
 		this.price = price;
 		this.nums = nums;
 	}
@@ -21,22 +21,24 @@ const shoppingCartSlice = createSlice({
 		addToCart(state, action) {
 			let isContained = false;
 			let index = 0;
-			for (const item in state.items) {
-				if (item.id === action.payload) {
-					isContained = true;
-					break ;
+			if (state.items.length !== 0) {
+				for (const item in state.items) {
+					if (item.id === action.payload.id) {
+						isContained = true;
+						break ;
+					}
+					index++;
 				}
-				index++;
 			}
 
 			if (isContained) {
 				state.items[index].nums++;
 			} else {
 				const newItem = new Item(
-					action.item.id,
-					action.item.name,
-					action.item.price,
-					action.item.nums,
+					action.payload.id,
+					action.payload.title,
+					action.payload.price,
+					1,
 				);
 				state.items.push(newItem);
 			}
@@ -59,4 +61,5 @@ const store = configureStore({
 	}
 });
 
+export const cartActions = shoppingCartSlice.actions;
 export default store;
