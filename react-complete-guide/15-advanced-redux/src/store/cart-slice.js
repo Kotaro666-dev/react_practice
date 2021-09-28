@@ -1,9 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { uiActions } from './ui-slice';
-
-const url = 'https://react-http-8a8f0-default-rtdb.firebaseio.com/cart.json';
-
 const cartSlice = createSlice({
 	name: 'cart',
 	initialState: {
@@ -11,6 +7,10 @@ const cartSlice = createSlice({
 		totalQuantity: 0,
 	},
 	reducers: {
+		replaceCart(state, action) {
+			state.totalQuantity = action.payload.totalQuantity;
+			state.items = action.payload.items;
+		},
 		addItemToCart(state, action) {
 			const newItem = action.payload;
 
@@ -43,45 +43,6 @@ const cartSlice = createSlice({
 		},
 	}
 });
-
-export const sendCartData = (cart) => {
-	return async (dispatch) => {
-		dispatch(uiActions.setNotification({
-			status: 'pending',
-			title: 'Sending...',
-			message: 'Sending cart data.',
-		}));
-
-		const sendRequest = async () => {
-			const response = await fetch(url, {
-				method: 'PUT',
-				body: JSON.stringify(cart),
-			});
-
-			if (response.status !== 200) {
-				throw new Error('Sending cart date failed.');
-			}
-		}
-
-		try {
-			await sendRequest();
-
-			dispatch(uiActions.setNotification({
-				status: 'success',
-				title: 'Success!',
-				message: 'Sent cart data successfully.',
-			}));
-		} catch (error) {
-			dispatch(uiActions.setNotification({
-				status: 'error',
-				title: 'Error!',
-				message: 'Faild sending cart data.',
-			}));
-		}
-	};
-}
-
-
 
 export const cartActions = cartSlice.actions;
 export default cartSlice;
