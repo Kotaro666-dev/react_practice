@@ -5,6 +5,19 @@ import HighlightedQuote from "../components/quotes/HighlightedQuote";
 import Comments from "../components/comments/Comments";
 import CommentsList from "../components/comments/CommentsList";
 
+const DUMMY_QUOTES = [
+	{
+		id: 'q1',
+		author: 'Kotaro',
+		text: 'My first quote',
+	},
+	{
+		id: 'q2',
+		author: 'Kotaro',
+		text: 'My second quote',
+	},
+];
+
 const DUMMY_COMMENTS = [
 	{
 		id: 'c1',
@@ -19,9 +32,17 @@ const DUMMY_COMMENTS = [
 const QuoteDetail = () => {
 	const params = useParams();
 
+	const quote = DUMMY_QUOTES.find((quote) => quote.id === params.quoteId);
+
+	if (!quote) {
+		return (
+			<p>No quote found!</p>
+		);
+	}
+
 	return (
 		<Fragment>
-			<HighlightedQuote author='Kotaro' text='Test1' />
+			<HighlightedQuote author={quote.author} text={quote.text} />
 			<Route path={`/quotes/${params.quoteId}/comments`}>
 				<Comments />
 			</Route>
