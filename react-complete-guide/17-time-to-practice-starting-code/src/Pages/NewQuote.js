@@ -3,9 +3,13 @@ import { Fragment } from "react";
 
 
 const NewQuote = () => {
+	const addQuoteHandler = (quoteData) => {
+		console.log(quoteData);
+	}
+
 	return (
 		<Fragment>
-			<QuoteFrom />
+			<QuoteFrom onAddQuote={addQuoteHandler}/>
 		</Fragment>
 	);
 };
