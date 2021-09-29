@@ -1,5 +1,7 @@
-import MainNavigation from "../components/layout/MainNavigation"
+import { Fragment } from "react";
+import { useParams, Route} from "react-router";
 
+import MainNavigation from "../components/layout/MainNavigation"
 import Layout from '../components/layout/Layout';
 import HighlightedQuote from "../components/quotes/HighlightedQuote";
 import Comments from "../components/comments/Comments";
@@ -16,17 +18,21 @@ const DUMMY_COMMENTS = [
 	}
 ];
 
-const QuoteDetail = (props) => {
+const QuoteDetail = () => {
+	const params = useParams();
+
 	return (
-		<section>
+		<Fragment>
 			<MainNavigation />
 			<Layout>
 				<HighlightedQuote author='Kotaro' text='Test1' />
-				<Comments />
+				<Route path={`/quotes/${params.quoteId}/comments`}>
+					<Comments />
+				</Route>
 				{DUMMY_COMMENTS.length === 0 && <p>No comments were added yet!!</p>}
 				{DUMMY_COMMENTS.length !== 0 && <CommentsList comments={DUMMY_COMMENTS} />}
 			</Layout>
-		</section>
+		</Fragment>
 
 	);
 };
