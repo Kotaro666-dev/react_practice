@@ -1,6 +1,17 @@
+import MainNavigation from "../components/layout/MainNavigation"
+
+import Layout from '../components/layout/Layout';
+import QuoteFrom from '../components/quotes/QuoteForm';
+
+
 const NewQuote = () => {
 	return (
-		<h1>New QuoteDetail Page</h1>
+		<section>
+			<MainNavigation />
+			<Layout>
+				<QuoteFrom />
+			</Layout>
+		</section>
 	);
 };
 
