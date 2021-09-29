@@ -1,17 +1,12 @@
-import MainNavigation from "../components/layout/MainNavigation"
-
-import Layout from '../components/layout/Layout';
 import QuoteFrom from '../components/quotes/QuoteForm';
+import { Fragment } from "react";
 
 
 const NewQuote = () => {
 	return (
-		<section>
-			<MainNavigation />
-			<Layout>
-				<QuoteFrom />
-			</Layout>
-		</section>
+		<Fragment>
+			<QuoteFrom />
+		</Fragment>
 	);
 };
 

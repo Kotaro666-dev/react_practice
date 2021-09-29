@@ -1,7 +1,5 @@
 import { Fragment } from "react";
-import MainNavigation from "../components/layout/MainNavigation";
 
-import Layout from '../components/layout/Layout';
 import QuoteList from "../components/quotes/QuoteList";
 import NoQuotesFound from '../components/quotes/NoQuotesFound';
 
@@ -22,11 +20,8 @@ const DUMMY_QUOTES = [
 const AllQuotes = () => {
 	return (
 		<Fragment>
-			<MainNavigation />
-			<Layout>
-				{DUMMY_QUOTES.length !== 0 && <QuoteList quotes={DUMMY_QUOTES}/>}
-				{DUMMY_QUOTES.length === 0 && <NoQuotesFound />}
-			</Layout>
+			{DUMMY_QUOTES.length !== 0 && <QuoteList quotes={DUMMY_QUOTES}/>}
+			{DUMMY_QUOTES.length === 0 && <NoQuotesFound />}
 		</Fragment>
 	);
 };
