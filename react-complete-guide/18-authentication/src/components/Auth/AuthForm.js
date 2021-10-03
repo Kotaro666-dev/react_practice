@@ -3,9 +3,6 @@ import { useState, useRef } from 'react';
 import classes from './AuthForm.module.css';
 
 const API_KEY = `${process.env.REACT_APP_AUTH_API_KEY}`;
-const signUpApiUrl = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${API_KEY}`;
-const signInApiUrl = ``;
-
 
 const AuthForm = () => {
 	const [isLogin, setIsLogin] = useState(true);
@@ -26,42 +23,42 @@ const AuthForm = () => {
 		// Optional: Add validation;
 
 		setIsLoarding(true);
+		let url;
 		if (isLogin) {
-
+			url = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${API_KEY}`;
 		} else {
-			// Sign Up
-
-			const postData = async () => {
-
-				try {
-					const response = await fetch(signUpApiUrl, {
-						method: 'POST',
-						headers: {
-							'Content-Type': 'application/json',
-						},
-						body: JSON.stringify({
-							email: enteredEmail,
-							password: enteredPassword,
-							returnSecureToken: true,
-						}),
-					});
-					setIsLoarding(false);
-					if (response.status !== 200) {
-						let errorMessage = 'Authentication failed! ';
-						const data = await response.json();
-						if (data && data.error && data.error.message) {
-							errorMessage += data.error.message;
-						}
-						alert(errorMessage);
-					}
-
-				} catch (error) {
-					console.log(error);
-				};
-			};
-
-			postData();
+			url = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${API_KEY}`;
 		}
+		const postData = async () => {
+			try {
+				const response = await fetch(url, {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+					body: JSON.stringify({
+						email: enteredEmail,
+						password: enteredPassword,
+						returnSecureToken: true,
+					}),
+				});
+				setIsLoarding(false);
+
+				if (response.status !== 200) {
+					let errorMessage = 'Authentication failed! ';
+					const data = await response.json();
+					if (data && data.error && data.error.message) {
+						errorMessage += data.error.message;
+					}
+					alert(errorMessage);
+				}
+				const data = await response.json();
+				console.log(data);
+			} catch (error) {
+				console.log(error);
+			};
+		};
+		postData();
 	}
 
 	return (
