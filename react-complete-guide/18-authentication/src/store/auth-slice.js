@@ -8,7 +8,7 @@ const authSlice = createSlice({
 	},
 	reducers: {
 		login(state, action) {
-			state.token = action.payload.token;
+			state.token = action.payload;
 			state.isLoggedIn = true;
 		},
 		logout(state) {
