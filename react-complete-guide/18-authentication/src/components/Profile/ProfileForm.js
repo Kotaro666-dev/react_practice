@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { authActions } from '../../store/auth-slice';
+import { useHistory } from 'react-router';
 
 import classes from './ProfileForm.module.css';
 
@@ -12,6 +13,7 @@ const ProfileForm = () => {
 	const dispatch = useDispatch();
 	const [isLoarding, setIsLoarding] = useState(false);
 	const idToken = useSelector(state => state.auth.idToken);
+	const history = useHistory();
 
 	const submitHandler = (event) => {
 		event.preventDefault();
@@ -46,6 +48,7 @@ const ProfileForm = () => {
 
 			const data = await response.json();
 			dispatch(authActions.updateIdToken(data.idToken));
+			history.replace('/');
 		};
 
 		try {

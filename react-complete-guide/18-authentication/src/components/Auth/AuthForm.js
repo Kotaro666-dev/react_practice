@@ -1,6 +1,7 @@
 import { useState, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { authActions } from '../../store/auth-slice';
+import { useHistory } from 'react-router';
 
 import classes from './AuthForm.module.css';
 
@@ -12,6 +13,7 @@ const AuthForm = () => {
 	const passwordInputref = useRef();
 	const [isLoarding, setIsLoarding] = useState(false);
 	const dispatch = useDispatch();
+	const history = useHistory();
 
 	const switchAuthModeHandler = () => {
 		setIsLogin((prevState) => !prevState);
@@ -57,6 +59,7 @@ const AuthForm = () => {
 				}
 				const data = await response.json();
 				dispatch(authActions.login(data.idToken));
+				history.replace('/');
 			} catch (error) {
 				console.log(error);
 			};
