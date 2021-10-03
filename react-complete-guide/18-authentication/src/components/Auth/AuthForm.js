@@ -2,10 +2,12 @@ import { useState, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { authActions } from '../../store/auth-slice';
 import { useHistory } from 'react-router';
+import { localStorageKey } from '../../helper/localStorage';
 
 import classes from './AuthForm.module.css';
 
 const API_KEY = `${process.env.REACT_APP_AUTH_API_KEY}`;
+const remainingTime = 5000; // テストで 5 秒
 
 const AuthForm = () => {
 	const [isLogin, setIsLogin] = useState(true);
@@ -59,6 +61,13 @@ const AuthForm = () => {
 				}
 				const data = await response.json();
 				dispatch(authActions.login(data.idToken));
+				localStorage.setItem(
+					localStorageKey, data.idToken,
+				);
+				setTimeout(() => {
+					dispatch(authActions.logout());
+				}, remainingTime);
+
 				history.replace('/');
 			} catch (error) {
 				console.log(error);

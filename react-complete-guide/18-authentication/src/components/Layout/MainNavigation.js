@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import classes from './MainNavigation.module.css';
 import { authActions } from '../../store/auth-slice';
+import { localStorageKey } from '../../helper/localStorage';
 
 const MainNavigation = () => {
 	const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
@@ -10,6 +11,7 @@ const MainNavigation = () => {
 
 	const lougoutHandler = () => {
 		dispatch(authActions.logout());
+		localStorage.removeItem(localStorageKey);
 		// Optional: redirect the user
 	}
 
