@@ -10,6 +10,7 @@ const MainNavigation = () => {
 
 	const lougoutHandler = () => {
 		dispatch(authActions.logout());
+		// Optional: redirect the user
 	}
 
 	return (
