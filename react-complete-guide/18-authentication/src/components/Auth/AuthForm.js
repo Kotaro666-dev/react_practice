@@ -11,6 +11,7 @@ const AuthForm = () => {
 	const [isLogin, setIsLogin] = useState(true);
 	const emailInputref = useRef();
 	const passwordInputref = useRef();
+	const [isLoarding, setIsLoarding] = useState(false);
 
 	const switchAuthModeHandler = () => {
 		setIsLogin((prevState) => !prevState);
@@ -24,12 +25,14 @@ const AuthForm = () => {
 
 		// Optional: Add validation;
 
+		setIsLoarding(true);
 		if (isLogin) {
 
 		} else {
 			// Sign Up
 
 			const postData = async () => {
+
 				try {
 					const response = await fetch(signUpApiUrl, {
 						method: 'POST',
@@ -42,9 +45,17 @@ const AuthForm = () => {
 							returnSecureToken: true,
 						}),
 					});
-					console.log(response);
+					setIsLoarding(false);
+					if (response.status !== 200) {
+						let errorMessage = 'Authentication failed! ';
+						const data = await response.json();
+						if (data && data.error && data.error.message) {
+							errorMessage += data.error.message;
+						}
+						alert(errorMessage);
+					}
+
 				} catch (error) {
-					// Show an error modal
 					console.log(error);
 				};
 			};
@@ -66,7 +77,8 @@ const AuthForm = () => {
 					<input ref={passwordInputref} type='password' id='password' required />
 				</div>
 				<div className={classes.actions}>
-					<button>{isLogin ? 'Login' : 'Create Account'}</button>
+					{!isLoarding && <button>{isLogin ? 'Login' : 'Create Account'}</button>}
+					{isLoarding && <p>Sending requret ....</p>}
 					<button
 						type='button'
 						className={classes.toggle}
