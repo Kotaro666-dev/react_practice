@@ -1,5 +1,6 @@
-export const localStorageKey = 'idToken';
-export const initialIdTokenValue = localStorage.getItem(localStorageKey);
+export const localStorageIdTokenKey = 'idToken';
+export const localStorageTimoutTimerKey = 'timeoutKey';
+export const initialIdTokenValue = localStorage.getItem(localStorageIdTokenKey);
 
 export const calculateRemainingTime = (expirationTime) => {
 	const currentTime = new Date().getTime();

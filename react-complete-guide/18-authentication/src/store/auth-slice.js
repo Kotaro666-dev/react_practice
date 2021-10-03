@@ -18,7 +18,7 @@ const authSlice = createSlice({
 		},
 		updateIdToken(state, action) {
 			state.idToken = action.payload;
-		}
+		},
 	}
 });
 

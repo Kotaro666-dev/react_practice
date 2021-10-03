@@ -2,7 +2,6 @@ import { useRef, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { authActions } from '../../store/auth-slice';
 import { useHistory } from 'react-router';
-import { localStorageKey } from '../../helper/localStorage';
 
 import classes from './ProfileForm.module.css';
 
@@ -48,11 +47,7 @@ const ProfileForm = () => {
 			}
 
 			const data = await response.json();
-			localStorage.remove(localStorageKey);
 			dispatch(authActions.updateIdToken(data.idToken));
-			localStorage.setItem(
-				localStorageKey, data.idToken
-			);
 			history.replace('/');
 		};
 
