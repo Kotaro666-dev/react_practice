@@ -1,10 +1,12 @@
+import { MongoClient, ObjectId } from "mongodb";
+
 import MeetupDetail from "../../components/meetups/MeetupDetail";
 
 const MeetupDetailPage = (props) => {
   return (
     <MeetupDetail
       title={props.meetupData.title}
-      src={props.meetupData.src}
+      image={props.meetupData.image}
       address={props.meetupData.address}
       description={props.meetupData.description}
     />
@@ -12,37 +14,53 @@ const MeetupDetailPage = (props) => {
 };
 
 export async function getStaticProps(context) {
-  // fetch data for a single meetup
   const meetupId = context.params.meetupId;
+
+  const client = await MongoClient.connect(
+    "mongodb+srv://Kotaro:NRR3uEg0mLty6H3P@cluster0.mplxn.mongodb.net/meetups?retryWrites=true&w=majority"
+  );
+  const db = client.db();
+  const meetupsCollection = db.collection("meetups");
+
+  const selectedMeetup = await meetupsCollection.findOne({
+    _id: ObjectId(meetupId),
+  });
+
+  client.close();
+
+  // fetch data for a single meetup
 
   return {
     props: {
       meetupData: {
-        id: meetupId,
-        title: "First meetup",
-        src: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Frauenkirche_and_Neues_Rathaus_Munich_March_2013.JPG/1024px-Frauenkirche_and_Neues_Rathaus_Munich_March_2013.JPG",
-        address: "Some address",
-        description: "This is a first meetup",
+        id: selectedMeetup._id.toString(),
+        title: selectedMeetup.title,
+        image: selectedMeetup.image,
+        address: selectedMeetup.address,
+        description: selectedMeetup.description,
       },
     },
   };
 }
 
 export async function getStaticPaths() {
+  const client = await MongoClient.connect(
+    "mongodb+srv://Kotaro:NRR3uEg0mLty6H3P@cluster0.mplxn.mongodb.net/meetups?retryWrites=true&w=majority"
+  );
+  const db = client.db();
+  const meetupsCollection = db.collection("meetups");
+
+  const meetups = await meetupsCollection.find({}, { _id: 1 }).toArray();
+
+  client.close();
+
   return {
     fallback: false,
-    paths: [
-      {
-        params: {
-          meetupId: "m1",
-        },
+    paths: meetups.map((meetup) => ({
+      params: {
+        meetupId: meetup._id.toString(),
       },
-      {
-        params: {
-          meetupId: "m2",
-        },
-      },
-    ],
+    })),
   };
 }
 
