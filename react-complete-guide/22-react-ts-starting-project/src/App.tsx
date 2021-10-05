@@ -1,8 +1,13 @@
-import logo from "./logo.svg";
-import "./App.css";
+import Todos from "./components/Todo";
+
+const DUMMIES_ITEMS = ["TEST1", "TEST2"];
 
 function App() {
-  return <div className="App"></div>;
+  return (
+    <div>
+      <Todos items={DUMMIES_ITEMS} />
+    </div>
+  );
 }
 
 export default App;
