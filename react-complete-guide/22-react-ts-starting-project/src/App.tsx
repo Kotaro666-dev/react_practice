@@ -1,11 +1,12 @@
 import Todos from "./components/Todo";
+import Todo from "./models/todo";
 
-const DUMMIES_ITEMS = ["TEST1", "TEST2"];
+const todos = [new Todo("TEST1"), new Todo("TEST2")];
 
 function App() {
   return (
     <div>
-      <Todos items={DUMMIES_ITEMS} />
+      <Todos items={todos} />
     </div>
   );
 }
