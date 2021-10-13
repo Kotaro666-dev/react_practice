@@ -48,7 +48,7 @@ const QuoteForm = (props) => {
 						<label htmlFor='author'>Author</label>
 						<input type='text' id='author' ref={authorInputRef} />
 					</div>
-						<div className={classes.control}>
+					<div className={classes.control}>
 						<label htmlFor='text'>Text</label>
 						<textarea id='text' rows='5' ref={textInputRef}></textarea>
 					</div>
