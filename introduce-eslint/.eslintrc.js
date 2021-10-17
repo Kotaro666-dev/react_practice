@@ -6,6 +6,12 @@ module.exports = {
   extends: [
     'plugin:react/recommended',
     'airbnb',
+    'airbnb/hooks',
+    'plugin:import/errors',
+    'plugin:import/warnings',
+    'plugin:import/typescript',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:@typescript-eslint/recommended-requiring-type-checking',
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
@@ -13,7 +19,10 @@ module.exports = {
       jsx: true,
     },
     ecmaVersion: 12,
+    // https://wonwon-eater.com/ts-eslint-import-error/
+    project: "./tsconfig.eslint.json",
     sourceType: 'module',
+    tsconfigRootDir: __dirname,
   },
   plugins: [
     'react',
