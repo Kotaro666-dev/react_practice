@@ -18,7 +18,7 @@ const AddTodo = () => {
 
     // Add state
     const newTodo: Todo = {
-      id: 1,
+      id: Math.floor(Date.now() / 1000), // Create Unixtime
       title: newTodoInput,
       isDone: false,
     };
