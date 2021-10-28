@@ -13,7 +13,7 @@ const TodoList = () => {
   const todos = useSelector(state => state.todo);
 
   return (
-    <ul>
+    <ul className="w-1/4">
       {todos.map(item => (
         <TodoItem id={item.id} title={item.title} isDone={item.isDone} />
       ))}

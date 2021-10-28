@@ -17,10 +17,17 @@ const TodoItem: React.VFC<ToDoItemProps> = ({id, title, isDone}) => {
   };
 
   return (
-    <>
-      <li key={id}>{title}</li>
-      <input type="checkbox" checked={isDone} onChange={checkboxHandler} />
-    </>
+    <div className="flex flex-row items-center">
+      <input
+        type="checkbox"
+        checked={isDone}
+        onChange={checkboxHandler}
+        className="w-5 h-5 mr-5"
+      />
+      <li key={id} className="text-2xl">
+        {title}
+      </li>
+    </div>
   );
 };
 
